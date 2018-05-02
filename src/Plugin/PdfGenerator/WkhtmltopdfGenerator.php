@@ -13,6 +13,7 @@ use Drupal\pdf_api\Annotation\PdfGenerator;
 use Drupal\Core\Annotation\Translation;
 use mikehaertl\wkhtmlto\Pdf;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 
 /**
  * A PDF generator plugin for the WKHTMLTOPDF library.
@@ -41,12 +42,20 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
   protected $generator;
 
   /**
+   * Instance of the messenger class.
+   *
+   * @var \Drupal\Core\Messenger;
+   */
+  protected $messenger;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, array $plugin_definition, Pdf $generator) {
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition, Pdf $generator, MessengerInterface $messenger) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->generator = $generator;
+    $this->messenger = $messenger;
   }
 
   /**
@@ -57,7 +66,8 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('wkhtmltopdf')
+      $container->get('wkhtmltopdf'),
+      $container->get('messenger')
     );
   }
 
@@ -162,6 +172,11 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
   public function stream($filelocation) {
     $this->preGenerate();
     $this->generator->saveAs($filelocation);
+
+    $error = $this->generator->getError();
+    if ($error) {
+      $this->messenger->addError($error);
+    }
   }
 
   /**
