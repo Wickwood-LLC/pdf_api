@@ -161,12 +161,12 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
   }
 
   /**
-   * {@inheritdoc}
+   * Display error messages.
+   *
+   * @return boolean
+   *   Whether any errors occurred and were not ignored.
    */
-  public function send() {
-    $this->preGenerate();
-    $this->generator->send($this->generator->getPdfFilename(), true);
-
+  public function display_errors() {
     $error = $this->generator->getError();
     if ($error && !$this->generator->ignoreWarnings) {
       // Add stdOut contents - they might help.
@@ -184,7 +184,19 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
         $markup = $error;
       }
       $this->messenger->addError($markup);
+      return true;
     }
+
+    return false;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function send() {
+    $this->preGenerate();
+    $this->generator->send($this->generator->getPdfFilename(), true);
+    $this->display_errors();
   }
 
   /**
@@ -193,26 +205,7 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
   public function stream($filelocation) {
     $this->preGenerate();
     $this->generator->saveAs($filelocation);
-
-    $error = $this->generator->getError();
-    if ($error && !$this->generator->ignoreWarnings) {
-      // Add stdOut contents - they might help.
-      $output = $this->generator->getCommand()->getOutput();
-      if ($output) {
-        $output = str_replace("\n", "<br />", $output);
-
-        $markup = new TranslatableMarkup('@error<br />Output was:<br />@output',
-          [
-            '@error' => $error,
-            '@output' => new FormattableMarkup($output, []),
-          ]);
-      }
-      else {
-        $markup = $error;
-      }
-      $this->messenger->addError($markup);
-    }
-    else {
+    if ($this->display_errors()) {
       $this->generator->send($filelocation, false);
     }
   }
