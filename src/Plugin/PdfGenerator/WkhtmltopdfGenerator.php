@@ -7,6 +7,8 @@
 
 namespace Drupal\pdf_api\Plugin\PdfGenerator;
 
+use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\pdf_api\Plugin\PdfGeneratorBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\pdf_api\Annotation\PdfGenerator;
@@ -167,7 +169,16 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
 
     $error = $this->generator->getError();
     if ($error) {
-      $this->messenger->addError($error);
+      // Add stdOut contents - they might help.
+      $output = $this->generator->getCommand()->getOutput();
+      $output = str_replace("\n", "<br />", $output);
+
+      $markup = new TranslatableMarkup('@error<br />Output was:<br />@output',
+        [
+          '@error' => $error,
+          '@output' => new FormattableMarkup($output, []),
+        ]);
+      $this->messenger->addError($markup);
     }
   }
 
@@ -180,7 +191,16 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
 
     $error = $this->generator->getError();
     if ($error) {
-      $this->messenger->addError($error);
+      // Add stdOut contents - they might help.
+      $output = $this->generator->getCommand()->getOutput();
+      $output = str_replace("\n", "<br />", $output);
+
+      $markup = new TranslatableMarkup('@error<br />Output was:<br />@output',
+        [
+          '@error' => $error,
+          '@output' => new FormattableMarkup($output, []),
+        ]);
+      $this->messenger->addError($markup);
     }
   }
 
