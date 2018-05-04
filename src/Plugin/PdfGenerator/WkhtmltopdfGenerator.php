@@ -171,13 +171,18 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
     if ($error) {
       // Add stdOut contents - they might help.
       $output = $this->generator->getCommand()->getOutput();
-      $output = str_replace("\n", "<br />", $output);
+      if ($output) {
+        $output = str_replace("\n", "<br />", $output);
 
-      $markup = new TranslatableMarkup('@error<br />Output was:<br />@output',
-        [
-          '@error' => $error,
-          '@output' => new FormattableMarkup($output, []),
-        ]);
+        $markup = new TranslatableMarkup('@error<br />Output was:<br />@output',
+          [
+            '@error' => $error,
+            '@output' => new FormattableMarkup($output, []),
+          ]);
+      }
+      else {
+        $markup = $error;
+      }
       $this->messenger->addError($markup);
     }
   }
@@ -193,13 +198,18 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
     if ($error) {
       // Add stdOut contents - they might help.
       $output = $this->generator->getCommand()->getOutput();
-      $output = str_replace("\n", "<br />", $output);
+      if ($output) {
+        $output = str_replace("\n", "<br />", $output);
 
-      $markup = new TranslatableMarkup('@error<br />Output was:<br />@output',
-        [
-          '@error' => $error,
-          '@output' => new FormattableMarkup($output, []),
-        ]);
+        $markup = new TranslatableMarkup('@error<br />Output was:<br />@output',
+          [
+            '@error' => $error,
+            '@output' => new FormattableMarkup($output, []),
+          ]);
+      }
+      else {
+        $markup = $error;
+      }
       $this->messenger->addError($markup);
     }
   }
