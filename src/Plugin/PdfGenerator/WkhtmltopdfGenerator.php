@@ -168,7 +168,7 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
     $this->generator->send($this->generator->getPdfFilename(), true);
 
     $error = $this->generator->getError();
-    if ($error) {
+    if ($error && !$this->generator->ignoreWarnings) {
       // Add stdOut contents - they might help.
       $output = $this->generator->getCommand()->getOutput();
       if ($output) {
@@ -195,7 +195,7 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
     $this->generator->saveAs($filelocation);
 
     $error = $this->generator->getError();
-    if ($error) {
+    if ($error && !$this->generator->ignoreWarnings) {
       // Add stdOut contents - they might help.
       $output = $this->generator->getCommand()->getOutput();
       if ($output) {
