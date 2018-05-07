@@ -156,7 +156,7 @@ class MpdfGenerator extends PdfGeneratorBase implements ContainerFactoryPluginIn
    */
   public function save($location) {
     $this->preGenerate();
-    $this->generator->send($location);
+    $this->generator->Output($location, 'F');
   }
 
   /**

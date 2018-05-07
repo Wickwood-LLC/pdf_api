@@ -73,18 +73,6 @@ class DompdfGenerator extends PdfGeneratorBase implements ContainerFactoryPlugin
     $this->setPageOrientation($paper_orientation);
     $this->addPage($pdf_content);
     $this->setHeader($header_content);
-    if ($save_pdf) {
-      $filename = $pdf_location;
-      if (empty($filename)) {
-        // If no user's choice, PDF name should be made from its current path.
-        $filename = str_replace('/', '_', \Drupal::service('path.current')->getPath());
-        $filename = substr($filename, 1);
-      }
-      $this->stream($filename);
-    }
-    else {
-      $this->send("");
-    }
   }
 
   /**
@@ -138,8 +126,7 @@ class DompdfGenerator extends PdfGeneratorBase implements ContainerFactoryPlugin
    * {@inheritdoc}
    */
   public function save($location) {
-    $this->preGenerate();
-    $this->generator->send($location);
+    $this->generator->Output($location, "F");
   }
 
   /**
