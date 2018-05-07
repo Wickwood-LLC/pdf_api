@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 // Disable DOMPDF's internal autoloader if you are using Composer.
 define('DOMPDF_ENABLE_AUTOLOAD', FALSE);
-// Include the DOMPDF config file (required).
-require DRUPAL_ROOT . "/vendor/dompdf/dompdf/dompdf_config.inc.php";
 
 /**
  * A PDF generator plugin for the dompdf library.
