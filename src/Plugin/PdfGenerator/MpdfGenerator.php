@@ -12,7 +12,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\pdf_api\Annotation\PdfGenerator;
 use Drupal\Core\Annotation\Translation;
 use Drupal\pdf_api\Plugin\PdfGeneratorInterface;
-use \mPDF;
+use Mpdf\Mpdf;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

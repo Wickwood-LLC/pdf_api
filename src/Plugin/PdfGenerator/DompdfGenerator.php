@@ -11,7 +11,7 @@ use Drupal\pdf_api\Plugin\PdfGeneratorBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\pdf_api\Annotation\PdfGenerator;
 use Drupal\Core\Annotation\Translation;
-use \DOMPDF;
+use Dompdf\Dompdf;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 // Disable DOMPDF's internal autoloader if you are using Composer.
