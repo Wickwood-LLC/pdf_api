@@ -186,4 +186,24 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
     $this->generator->setOptions($this->options);
   }
 
+  /**
+   * Get errors from the generator.
+   *
+   * @return string
+   *   The content of the stderr pipe.
+   */
+  public function getStderr() {
+    return $this->generator->getError();
+  }
+
+  /**
+   * Get stdout output from the generator.
+   *
+   * @return string
+   *   The content of the stdout pipe.
+   */
+  public function getStdout() {
+    return $this->generator->getCommand()->getOutput();
+  }
+
 }
