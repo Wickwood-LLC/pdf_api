@@ -155,7 +155,6 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
   public function send() {
     $this->preGenerate();
     $this->generator->send($this->generator->getPdfFilename(), true);
-    $this->display_errors();
   }
 
   /**
@@ -164,9 +163,7 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
   public function stream($filelocation) {
     $this->preGenerate();
     $this->generator->saveAs($filelocation);
-    if ($this->display_errors()) {
-      $this->generator->send($filelocation, false);
-    }
+    $this->generator->send($filelocation, false);
   }
 
   /**
