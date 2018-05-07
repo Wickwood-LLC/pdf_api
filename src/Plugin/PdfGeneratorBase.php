@@ -227,7 +227,7 @@ abstract class PdfGeneratorBase extends PluginBase implements PdfGeneratorInterf
    * @return boolean
    *   Whether any errors occurred and were not ignored.
    */
-  public function display_errors() {
+  public function displayErrors() {
     $error = $this->getStderr();
     if ($error && !$this->generator->ignoreWarnings) {
       // Add stdOut contents - they might help.
