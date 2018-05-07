@@ -124,14 +124,15 @@ class DompdfGenerator extends PdfGeneratorBase implements ContainerFactoryPlugin
    * {@inheritdoc}
    */
   public function save($location) {
-    $this->generator->Output($location, "F");
+    $content = $this->generator->output([]);
+    file_put_contents($location, $content);
   }
 
   /**
    * {@inheritdoc}
    */
   public function send() {
-    $this->generator->stream("sample.pdf", array('Attachment' => 0));
+    $this->generator->stream("pdf", array('Attachment' => 0));
   }
 
   /**
