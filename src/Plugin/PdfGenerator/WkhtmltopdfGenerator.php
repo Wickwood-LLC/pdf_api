@@ -150,36 +150,6 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
   }
 
   /**
-   * Display error messages.
-   *
-   * @return boolean
-   *   Whether any errors occurred and were not ignored.
-   */
-  public function display_errors() {
-    $error = $this->generator->getError();
-    if ($error && !$this->generator->ignoreWarnings) {
-      // Add stdOut contents - they might help.
-      $output = $this->generator->getCommand()->getOutput();
-      if ($output) {
-        $output = str_replace("\n", "<br />", $output);
-
-        $markup = new TranslatableMarkup('@error<br />Output was:<br />@output',
-          [
-            '@error' => $error,
-            '@output' => new FormattableMarkup($output, []),
-          ]);
-      }
-      else {
-        $markup = $error;
-      }
-      $this->messenger->addError($markup);
-      return true;
-    }
-
-    return false;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function send() {
