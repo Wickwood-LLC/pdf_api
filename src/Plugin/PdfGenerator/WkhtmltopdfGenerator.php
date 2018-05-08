@@ -30,13 +30,6 @@ use Drupal\Core\Messenger\MessengerInterface;
 class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The global options for WKHTMLTOPDF.
-   *
-   * @var array
-   */
-  protected $options = array();
-
-  /**
    * Instance of the WKHtmlToPdf class library.
    *
    * @var \WkHtmlToPdf

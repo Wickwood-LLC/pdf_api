@@ -27,13 +27,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class TcpdfGenerator extends PdfGeneratorBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The global options for TCPDF.
-   *
-   * @var array
-   */
-  protected $options = array();
-
-  /**
    * Instance of the TCPDF class library.
    *
    * @var \TCPDF

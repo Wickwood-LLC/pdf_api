@@ -28,13 +28,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class MpdfGenerator extends PdfGeneratorBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The global options for mPDF.
-   *
-   * @var array
-   */
-  protected $options = array();
-
-  /**
    * Instance of the mPdf class library.
    *
    * @var \mPdf

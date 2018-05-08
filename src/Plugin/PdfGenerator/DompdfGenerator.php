@@ -30,13 +30,6 @@ define('DOMPDF_ENABLE_AUTOLOAD', FALSE);
 class DompdfGenerator extends PdfGeneratorBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The global options for TCPDF.
-   *
-   * @var array
-   */
-  protected $options = array();
-
-  /**
    * Instance of the DOMPDF class library.
    *
    * @var \DOMPDF

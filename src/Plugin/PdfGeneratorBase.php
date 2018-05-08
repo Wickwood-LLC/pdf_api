@@ -19,6 +19,13 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 abstract class PdfGeneratorBase extends PluginBase implements PdfGeneratorInterface {
 
   /**
+   * The global options for the PDF generator.
+   *
+   * @var array
+   */
+  protected $options = array();
+
+  /**
    * {@inheritdoc}
    */
   public function getId() {
