@@ -216,6 +216,12 @@ class MpdfGenerator extends PdfGeneratorBase implements ContainerFactoryPluginIn
 
     $this->generator = new mPDF($config);
 
+    // Apply any other options.
+    unset($options['orientation']);
+    unset($options['sheet-size']);
+
+    $this->generator->AddPageByArray($options);
+
     $this->setHeader($this->headerContent);
     $this->setFooter($this->footerContent);
     $stylesheet = '.node_view  { display: none; }';
