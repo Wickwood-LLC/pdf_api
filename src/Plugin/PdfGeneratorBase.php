@@ -258,4 +258,14 @@ abstract class PdfGeneratorBase extends PluginBase implements PdfGeneratorInterf
     return false;
   }
 
+  /**
+   * Set global options.
+   *
+   * @param array $options
+   *   The array of options to merge into the currently set options.
+   */
+  public function setOptions(array $options) {
+    $this->options += $options;
+  }
+
 }

@@ -160,16 +160,6 @@ class WkhtmltopdfGenerator extends PdfGeneratorBase implements ContainerFactoryP
   }
 
   /**
-   * Set global options.
-   *
-   * @param array $options
-   *   The array of options to merge into the currently set options.
-   */
-  protected function setOptions(array $options) {
-    $this->options += $options;
-  }
-
-  /**
    * Set the global options from plugin into the WKHTMLTOPDF generator class.
    */
   protected function preGenerate() {

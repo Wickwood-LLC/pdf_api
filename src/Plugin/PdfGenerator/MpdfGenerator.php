@@ -172,16 +172,6 @@ class MpdfGenerator extends PdfGeneratorBase implements ContainerFactoryPluginIn
   }
 
   /**
-   * Set global options.
-   *
-   * @param array $options
-   *   The array of options to merge into the currently set options.
-   */
-  protected function setOptions(array $options) {
-    $this->options += $options;
-  }
-
-  /**
    * Set the global options from the plugin into the mPDF generator class.
    */
   protected function preGenerate() {
